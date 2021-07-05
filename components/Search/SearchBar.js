@@ -3,31 +3,31 @@ import { StyleSheet, Text, View, TextInput } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 
 export default function SearchBar() {
-  return (
-      <View style={styles.container}>
-        <View style={styles.searchContainer}>
-            <View style={styles.vwSearch}>
-                <AntDesign name="search1" size={24} color="black" />
+    return (
+        <View style={styles.container}>
+            <View style={styles.searchContainer}>
+                <View style={styles.vwSearch}>
+                    <AntDesign name="search1" size={24} color="black" />
+                </View>
+                <TextInput
+                    placeholder="Search Properties, Hostels..."
+                    style={styles.textInput}
+                    onChangeText={(text) => {
+                        var letters = /^$|^[a-zA-Z._\b ]+$/;
+                        if (text.length > 12)
+                            setError("Query too long.")
+                        else if (text.match(letters)) {
+                            setQuery(text)
+                            updateSearch(text)
+                            if (error)
+                                setError(false)
+                        }
+                        else setError("Please only enter alphabets")
+                    }}
+                />
             </View>
-            <TextInput
-                placeholder="Search Properties, Hostels..."
-                style={styles.textInput}
-                onChangeText={(text) => {
-                    var letters = /^$|^[a-zA-Z._\b ]+$/;
-                    if (text.length > 12)
-                        setError("Query too long.")
-                    else if (text.match(letters)) {
-                        setQuery(text)
-                        updateSearch(text)
-                        if (error)
-                            setError(false)
-                    }
-                    else setError("Please only enter alphabets")
-                }}
-            />
         </View>
-      </View>
-  );
+    );
 }
 
 const styles = StyleSheet.create({
